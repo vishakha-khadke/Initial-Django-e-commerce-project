@@ -1,0 +1,33 @@
+<h2>Checkout</h2>
+
+<table border="1">
+    <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for item in checkout_items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.price }}</td>
+        <td>{{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Grand Total: ₹{{ total }}</h3>
+
+<hr>
+
+<h3>Delivery Details</h3>
+<form method="post">
+    {% csrf_token %}
+    Name: <input type="text" required><br><br>
+    Address: <textarea required></textarea><br><br>
+    Phone: <input type="text" required><br><br>
+
+    <button type="submit">Place Order</button>
+</form>

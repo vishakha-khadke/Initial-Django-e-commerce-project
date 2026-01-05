@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+        .item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🛒 My Cart</h1>
+
+{% if cart_items %}
+    {% for item in cart_items %}
+        <div style="border-bottom:1px solid #ccc; padding:10px;">
+            <h3>{{ item.product.name }}</h3>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Total: ₹{{ item.total }}</p>
+
+            <a href="{% url 'remove_from_cart' item.product.id %}">
+                <button>❌ Remove</button>
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Cart is empty</p>
+{% endif %}
+
+<a href="/">⬅ Back to Home</a><br> 
+<a href="/checkout/">Proceed to Checkout ➡</a>
+
+</body>
+</html>
